@@ -2,6 +2,8 @@
   Base Element Styles
 ==================================== */
 
+@import url('https://fonts.googleapis.com/css?family=Nunito|Roboto+Mono');
+
 * {
   box-sizing: border-box;
 }
@@ -9,13 +11,13 @@
 body,
 input,
 button {
- font-family: 'Roboto', sans-serif;
+	font-family: 'Nunito', sans-serif;
 }
 
 body {
   font: 1em/1.5;
-  color: #184f68;
-	background: #accbd9;
+  color: rgba(6, 49, 68, 0.9);
+	background: #e6f0f5;
 }
 
 header {
@@ -24,7 +26,7 @@ header {
 
 h1 {
 	font-size: 2.5em;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 	margin: 0;
 }
 
@@ -38,7 +40,9 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #85b5ca;
+	background: #9bdcf8;
+	border: 2px solid rgba(8, 63, 87, 0.7);
+	border-radius: 4px;
 }
 
 fieldset,
@@ -60,7 +64,7 @@ button {
 legend {
 	font-weight: 500;
 	padding-top: .5em;
-	border-top: 2px solid #679cb3;
+	border-top: 2px solid rgba(8, 63, 87, 0.6);
 	margin-bottom: 1.125em;
 }
 
@@ -85,8 +89,9 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #c1deeb;
-	border: 2px solid #c1deeb;
+	background: #e9f6fb;
+	border: 2px solid #b0d3e2;
+	border-radius: 4px;
 	outline: none;
 }
 
@@ -104,13 +109,23 @@ input[type="radio"] {
 button {
 	color: #fff;
 	padding: .55em 1.25em;
-	background: #22627e;
+	background: #083f57;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
+	border: 2px solid black;
+	border-radius: 4px;
+	transition: all 0.5s;
 }
 
 button:hover {
-	background: #184c62;
+	background: #0887bd;
+	border: 2px solid #f4f6f6;
+}
+
+input, 
+select, 
+option {
+	font-family: 'roboto', sans-serif;
 }
 
 /* ================================= 
@@ -177,5 +192,9 @@ button:hover {
 	}
 	.col-6 {
 		width: 49%;
+	}
+
+	label {
+		clear: both;
 	}
 }
