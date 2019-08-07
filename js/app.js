@@ -2,8 +2,6 @@
 // Treehouse Techdegree
 // FSJS Project 3 - Interactive Form
 
-
-
 $(document).ready(function () {
 
   // mouse focus in the name input and hide other job input field
@@ -115,7 +113,6 @@ $(document).ready(function () {
     }
   });
 
-
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
 
@@ -123,8 +120,6 @@ $(document).ready(function () {
 
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
-
-
 
   // all regex variables are listed here
   regexName = /^\s*$/;
@@ -147,37 +142,30 @@ $(document).ready(function () {
 
     // regex validation for the name, email, activities, credit card, zip, and cvv fields
     if (regexName.test($('#name').val())) {
-      console.log("The name field is blank");
       error = "<h3>The name field cannot be left blank. Please enter your name.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else if (!regexEmail.test($('#mail').val())) {
-      console.log("The email field is not in the correct format");
       error = "<h3>The email address is not in the correct format. Please enter a valid email address.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else if ($(".activities > label > input:checked").length === 0) {
-      console.log("No checkboxes selected.");
       error = "<h3>You have not selected an activity. Please select an activity.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else if (!regexCreditCard.test($('#cc-num').val())) {
-      console.log("Invalid Credit Card.");
       error = "<h3>The credit card number entered is invalid. Please enter a valid credit card number.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else if (!regexZip.test($('#zip').val())) {
-      console.log("Invalid Zip Code.");
       error = "<h3>The zip code you entered is invalid. Please enter a valid 5 digit zip code.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else if (!regexCvv.test($('#cvv').val())) {
-      console.log("Invalid CVV.");
       error = "<h3>The cvv number you entered is invalid. Please enter a valid 3 digit cvv.<br></h3>";
       $('#error').css('color', 'red').show();
     }
     else {
-      console.log("Success.");
       error = "<h3>You have submitted the form successfully.<br></h3>";
       $('#error').css('color', 'green').show();
       $('form')[0].reset();
@@ -188,7 +176,5 @@ $(document).ready(function () {
 
     // an animation that slowly scrolls up when the form is submitted
     $('body, html').animate({ scrollTop: $('form').offset().top }, 'slow');
-  }
-  );
+  });
 });
-
