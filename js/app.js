@@ -171,7 +171,8 @@ $(document).ready(function () {
       $('form')[0].reset();
     }
 
-    // inserts the error text into the id #error
+    // inserts the error text into the id #error 
+    // that was preppended to the top of the form
     document.getElementById('error').innerHTML = error;
 
     // an animation that slowly scrolls up when the form is submitted
