@@ -121,59 +121,178 @@ $(document).ready(function () {
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
 
-  // all regex variables are listed here
-  regexName = /^\s*$/;
-  regexEmail = /^\S+@\S+\.\S+$/;
-  regexCreditCard = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
-  regexZip = /^\d{5}$/;
-  regexCvv = /^\d{3}$/;
-  var error = "";
 
-  // add a div with the id #error for text to display at the top if there is an error and initially hide the div
-  $('form').prepend('<div id="error"></div>');
-  $('#error').hide();
+  // variables used later inside of functions
+  // when errors occur, variables are set to true
+  // when there are no errors, variables are set to false
+  var error_name = false;
+  var error_mail = false;
+  var error_checkbox = false;
+  var error_ccnum = false;
+  var error_zip = false;
+  var error_cvv = false;
 
-
-  // handles our form submission
-  $('form').submit(function (e) {
-    
-    // prevents the default refresh of the submit button
-    e.preventDefault();
-
-    // regex validation for the name, email, activities, credit card, zip, and cvv fields
+  // check name field for validation
+  function check_name() {
+    regexName = /^\s*$/;
     if (regexName.test($('#name').val())) {
-      error = "<h3>The name field cannot be left blank. Please enter your name.<br></h3>";
-      $('#error').css('color', 'red').show();
-    }
-    else if (!regexEmail.test($('#mail').val())) {
-      error = "<h3>The email address is not in the correct format. Please enter a valid email address.<br></h3>";
-      $('#error').css('color', 'red').show();
-    }
-    else if ($(".activities > label > input:checked").length === 0) {
-      error = "<h3>You have not selected an activity. Please select an activity.<br></h3>";
-      $('#error').css('color', 'red').show();
-    }
-    else if (!regexCreditCard.test($('#cc-num').val())) {
-      error = "<h3>The credit card number entered is invalid. Please enter a valid credit card number.<br></h3>";
-      $('#error').css('color', 'red').show();
-    }
-    else if (!regexZip.test($('#zip').val())) {
-      error = "<h3>The zip code you entered is invalid. Please enter a valid 5 digit zip code.<br></h3>";
-      $('#error').css('color', 'red').show();
-    }
-    else if (!regexCvv.test($('#cvv').val())) {
-      error = "<h3>The cvv number you entered is invalid. Please enter a valid 3 digit cvv.<br></h3>";
-      $('#error').css('color', 'red').show();
+      $('#nameError').html('<h3>The name field cannot be left blank. Please enter your name.<br></h3>');
+      $('#nameError').css('color', 'red').show();
+      $('#name').css('border', 'solid red 3px').show();
+      error_name = true;
     }
     else {
-      error = "<h3>You have submitted the form successfully.<br></h3>";
-      $('#error').css('color', 'green').show();
-      $('form')[0].reset();
+      $('#nameError').empty();
+      $('#name').css('border', 'none').show();
+      console.log("name field is valid");
+      error_name = false;
+    }
+  };
+
+  // check email field for validation
+  function check_mail() {
+    regexEmail = /^\S+@\S+\.\S+$/;
+    if (!regexEmail.test($('#mail').val())) {
+      $('#mailError').html('<h3>The email address is not in the correct format. Please enter a valid email address.<br></h3>');
+      $('#mailError').css('color', 'red').show();
+      $('#mail').css('border', 'solid red 3px').show();
+      error_mail = true;
+    }
+    else {
+      $('#mail').css('border', 'none').show();
+      $('#mailError').css('color', 'red').hide();
+      console.log("mail field is valid");
+      error_mail = false;
+    };
+
+  }
+
+  // check checkboxes for validation
+  function check_checkboxes() {
+    if ($(".activities > label > input:checked").length === 0) {
+      $('#checkboxError').html('<h3>You have not selected an activity. Please select an activity.<br></h3>');
+      $('#checkboxError').css('color', 'red').show();
+      $('.activities').css('border', 'solid red 3px').show();
+      error_checkbox = true;
+    }
+    else {
+      $('.activities').css('border', 'none').show();
+      $('#checkboxError').css('color', 'red').hide();
+      console.log("checkbox field is valid");
+      error_checkbox = false;
+    };
+
+  }
+
+  // check credit card field for validation
+  function check_cc() {
+    regexCreditCard = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
+    if (!regexCreditCard.test($('#cc-num').val())) {
+      $('#ccError').html('<h3>The credit card number entered is invalid. Please enter a valid credit card number.<br></h3>');
+      $('#ccError').css('color', 'red').show();
+      $('#cc-num').css('border', 'solid red 3px').show();
+      console.log("cc is invalid");
+      error_ccnum = true;
+    }
+    else {
+      $('#cc-num').css('border', 'none').show();
+      $('#ccError').css('color', 'red').hide();
+      console.log("credit card field is valid");
+      error_ccnum = false;
+    };
+
+  }
+
+  // check zip field for validation
+  function check_zip() {
+    regexZip = /^\d{5}$/;
+    if (!regexZip.test($('#zip').val())) {
+      $('#zipError').html('<h3>The zip code you entered is invalid. Please enter a valid 5 digit zip code.<br></h3>');
+      $('#zipError').css('color', 'red').show();
+      $('#zip').css('border', 'solid red 3px').show();
+      console.log("zip is invalid");
+      error_zip = true;
+    }
+    else {
+      $('#zip').css('border', 'none').show();
+      $('#zipError').css('color', 'red').hide();
+      console.log("zip field is valid");
+      error_zip = false;
+    };
+
+  }
+
+  // check cvv field for validation
+  function check_cvv() {
+    regexCvv = /^\d{3}$/;
+    if (!regexCvv.test($('#cvv').val())) {
+      $('#cvvError').html('<h3>The cvv number you entered is invalid. Please enter a valid 3 digit cvv.<br></h3>');
+      $('#cvvError').css('color', 'red').show();
+      $('#cvv').css('border', 'solid red 3px').show();
+      console.log("cvv is invalid");
+      error_cvv = true;
+    }
+    else {
+      $('#cvv').css('border', 'none').show();
+      $('#cvvError').css('color', 'red').hide();
+      console.log("cvv field is valid");
+      error_cvv = false;
+    };
+
+  }
+
+  // handles our form submission
+  $('form').submit(function (event) {
+
+    // prevents the default refresh of the submit button
+    event.preventDefault();
+
+
+    // call the name, mail, and checkbox function to validate fields
+    check_name();
+    check_mail();
+    check_checkboxes();
+
+    // if paypal or bitcoin is selected, no need to validate credit card fields
+    if ($('#payment option:selected').val() === "paypal") {
+      error_ccnum = false;
+      error_zip = false;
+      error_cvv = false;
+    } else if ($('#payment option:selected').val() === "bitcoin") {
+      error_ccnum = false;
+      error_zip = false;
+      error_cvv = false;
+    } else {
+      check_cc();
+      check_zip();
+      check_cvv();
     }
 
-    // inserts the error text into the id #error 
-    // that was preppended to the top of the form
-    document.getElementById('error').innerHTML = error;
+    // determines if all fields are valid
+    if (error_name == false && error_mail == false &&
+      error_checkbox == false && error_ccnum == false &&
+      error_zip == false && error_cvv == false) {
+      success();
+      console.log("Success");
+    } else {
+      fail();
+      console.log("Fail");
+    }
+
+    // prints out a fail message at the top of the page
+    function fail() {
+      $('#fail')
+        .css('color', 'red')
+        .html('<h3>Please correct the fields below</h3>');
+    };
+
+    // prints out a success message at the top of the page
+    function success() {
+      $('#fail').hide();
+      $('#success').html('<h3>You have submitted the form successfully.<br></h3>');
+      $('#success').css('color', 'green').show();
+      $('form')[0].reset();
+    };
 
     // an animation that slowly scrolls up when the form is submitted
     $('body, html').animate({ scrollTop: $('form').offset().top }, 'slow');
