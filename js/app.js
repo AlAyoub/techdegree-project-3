@@ -281,14 +281,15 @@ $(document).ready(function () {
 
     // prints out a fail message at the top of the page
     function fail() {
-      $('#fail')
-        .css('color', 'red')
-        .html('<h3>Please correct the fields below</h3>');
+      $('#success').hide();
+      $('#fail').show();
+      $('#fail').css('color', 'red').html('<h3>Please correct the fields below</h3>');
     };
 
     // prints out a success message at the top of the page
     function success() {
       $('#fail').hide();
+      $('#success').show();
       $('#success').html('<h3>You have submitted the form successfully.<br></h3>');
       $('#success').css('color', 'green').show();
       $('form')[0].reset();
